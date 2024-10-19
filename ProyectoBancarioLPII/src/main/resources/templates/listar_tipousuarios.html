@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Tipos de Usuario</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Lista de Tipos de Usuario</h2>
+        <a th:href="@{/tipousuarios/registrar_tipousuario}" class="btn btn-primary">Registrar Tipo de Usuario</a>
+        
+        <table class="table mt-4">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Descripción</th>
+                    <th>Permisos</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="tipo : ${lista_tipousuarios}">
+                    <td th:text="${tipo.tipoUsuarioId}"></td>
+                    <td th:text="${tipo.descripcion}"></td>
+                    <td th:text="${tipo.permisos}"></td>
+                    <td>
+                        <a th:href="@{/tipousuarios/detalle_tipousuario/{id}(id=${tipo.tipoUsuarioId})}" class="btn btn-info">Ver</a> |
+                        <a th:href="@{/tipousuarios/editar_tipousuario/{id}(id=${tipo.tipoUsuarioId})}" class="btn btn-warning">Editar</a> |
+                        <a th:href="@{/tipousuarios/delete_tipousuario/{id}(id=${tipo.tipoUsuarioId})}" class="btn btn-danger">Eliminar</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
