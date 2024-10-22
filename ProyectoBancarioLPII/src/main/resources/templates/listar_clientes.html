@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Clientes</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h2 class="mt-5">Listado de Clientes</h2>
+        <table class="table mt-4">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Apellidos</th>
+                    <th>Edad</th>
+                    <th>Dirección</th>
+                    <th>Teléfono</th>
+                    <th>Fecha de Nacimiento</th>
+                    <th>DNI</th>
+                    <th>Correo</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="cliente : ${lista_clientes}">
+                    <td th:text="${cliente.clienteId}"></td>
+                    <td th:text="${cliente.nombre}"></td>
+                    <td th:text="${cliente.apellidos}"></td>
+                    <td th:text="${cliente.edad}"></td>
+                    <td th:text="${cliente.direccion}"></td>
+                    <td th:text="${cliente.telefono}"></td>
+                    <td th:text="${cliente.fechaNacimiento}"></td>
+                    <td th:text="${cliente.dni}"></td>
+                    <td th:text="${cliente.correo}"></td>
+                    <td th:text="${cliente.estado.descripcion}"></td> <!-- Asegúrate de que 'nombre' sea un campo válido en EstadoClienteEntity -->
+                    <td>
+                        <a th:href="@{/clientes/detalle_cliente/{id}(id=${cliente.clienteId})}" class="btn btn-info">Ver</a> |
+                        <a th:href="@{/clientes/editar_cliente/{id}(id=${cliente.clienteId})}" class="btn btn-warning">Editar</a> |
+                        <a th:href="@{/clientes/delete_cliente/{id}(id=${cliente.clienteId})}" class="btn btn-danger">Eliminar</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

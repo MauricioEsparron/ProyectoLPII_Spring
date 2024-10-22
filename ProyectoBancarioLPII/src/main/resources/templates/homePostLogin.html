@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Home - Banco</title>
+	<!-- Enlace a Bootstrap CSS -->
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+
+	<!-- Cabecera -->
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+		<div class="container">
+			<a class="navbar-brand" href="#">BANCO</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+				aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+				<ul class="navbar-nav">
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="listadoDropdown" role="button"
+							data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							Listado
+						</a>
+						<div class="dropdown-menu" aria-labelledby="listadoDropdown">
+							<a class="dropdown-item" href="/usuarios/listar_usuarios">Listado Usuarios</a>
+							<a class="dropdown-item" href="/tiposusuarios/listar_tipousuarios">Listado Tipo Usuario</a>
+							<a class="dropdown-item" href="/tipotarjetas/listar_tipotarjetas">Listado Tipo Tarjeta</a>
+							<a class="dropdown-item" href="/tipocuentas/listar_tipocuentas">Listado Tipo Cuenta</a>
+							<a class="dropdown-item" href="/tarjetas/listar_tarjetas">Listado Tarjetas</a>
+							<a class="dropdown-item" href="/cuentas/listar_cuentas">Listados Cuenta</a>
+							<a class="dropdown-item" href="/clientes/listar_clientes">Listado Clientes</a>
+						</div>
+					</li>
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="registroDropdown" role="button"
+							data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							Registro
+						</a>
+						<div class="dropdown-menu" aria-labelledby="registroDropdown">
+							<a class="dropdown-item" href="/usuarios/registrar_usuario">Registrar Usuario</a>
+							<a class="dropdown-item" href="/tipos_usuario/registrar">Registrar Tipo Usuario</a>
+							<a class="dropdown-item" href="/tipotarjeta/registrar">Registrar Tipo Tarjeta</a>
+							<a class="dropdown-item" href="/tipocuenta/registrar">Registrar Tipo Cuenta</a>
+							<a class="dropdown-item" href="/tarjetas/registrar">Registrar Tarjeta</a>
+							<a class="dropdown-item" href="/operacion_cuenta/registrar">Registrar Operación Cuenta</a>
+							<a class="dropdown-item" href="/clientes/registrar_cliente">Registrar Cliente</a>
+						</div>
+					</li>
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="auditoriaDropdown" role="button"
+							data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							Auditoría
+						</a>
+						<div class="dropdown-menu" aria-labelledby="auditoriaDropdown">
+							<a class="dropdown-item" href="/auditoria/usuarios">Auditar Usuarios</a>
+							<a class="dropdown-item" href="/auditoria/tarjetas">Auditar Tarjetas</a>
+							<a class="dropdown-item" href="/auditoria/cuentas">Auditar Cuentas</a>
+						</div>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="/login">Login</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="/usuarios/registrar_usuario">Sign In</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="/logout">Log Out</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	<!-- Contenido principal -->
+	<div class="container mt-5">
+		<h1>Bienvenido al Banco</h1>
+		<p>Este es un ejemplo de la página de inicio.</p>
+	</div>
+
+	<!-- Enlace a Bootstrap JS y jQuery -->
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

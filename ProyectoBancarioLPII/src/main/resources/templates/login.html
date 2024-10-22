@@ -1,43 +1,38 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home - Banco</title>
-    <!-- Enlace a Bootstrap CSS -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Login - Banco</title>
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
+
 <body>
+	<div class="container mt-5">
+		<h2>Iniciar Sesión</h2>
 
-<!-- Cabecera -->
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container">
-        <a class="navbar-brand" href="#">BANCO</a>
-        <div class="collapse navbar-collapse justify-content-end">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Login</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Sign In</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Log Out</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
+		<!-- Mostrar mensaje de error si existe -->
+		<div th:if="${errorMessage}" class="alert alert-danger" role="alert">
+			<span th:text="${errorMessage}"></span>
+		</div>
 
-<!-- Contenido principal -->
-<div class="container mt-5">
-    <h1>Bienvenido al Banco</h1>
-    <p>Este es un ejemplo de la página de inicio.</p>
-</div>
+		<form action="/login" method="post">
+			<div class="form-group">
+				<label for="correo">Correo:</label>
+				<input type="email" class="form-control" id="correo" name="correo" required>
+			</div>
+			<div class="form-group">
+				<label for="password">Contraseña:</label>
+				<input type="password" class="form-control" id="password" name="password" required>
+			</div>
+			<button type="submit" class="btn btn-primary">Iniciar Sesión</button>
+		</form>
+	</div>
 
-<!-- Enlace a Bootstrap JS y jQuery -->
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
+
 </html>
