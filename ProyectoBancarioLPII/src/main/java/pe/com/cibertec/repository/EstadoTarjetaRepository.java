@@ -1,5 +1,11 @@
 package pe.com.cibertec.repository;
 
-public interface EstadoTarjetaRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import pe.com.cibertec.model.EstadoTarjetaEntity;
+
+@Repository
+public interface EstadoTarjetaRepository extends JpaRepository<EstadoTarjetaEntity, Integer> {
 
 }
