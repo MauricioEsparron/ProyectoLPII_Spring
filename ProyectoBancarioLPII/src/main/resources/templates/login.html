@@ -1,36 +1,56 @@
 <!DOCTYPE html>
-<html lang="es">
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
 	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Login - Banco</title>
-	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+	<title>Login</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<style>
+		body {
+			background-image: url('/img/img1.jpg');
+			/* URL de la imagen */
+			background-size: cover;
+			/* Asegura que la imagen cubra todo el fondo */
+			background-position: center;
+			/* Centra la imagen */
+			background-repeat: no-repeat;
+			/* Evita que la imagen se repita */
+			font-family: 'Helvetica Neue', 'Arial', sans-serif;
+			/* Fuente similar a macOS */
+		}
+
+		.card {
+			background-color: rgba(255, 255, 255, 0.85);
+			/* Fondo blanco con mayor opacidad para el formulario */
+			border-radius: 10px;
+			/* Bordes redondeados para un diseño más suave */
+		}
+	</style>
 </head>
 
-<body>
-	<div class="container mt-5">
-		<h2>Iniciar Sesión</h2>
-
-		<!-- Mostrar mensaje de error si existe -->
-		<div th:if="${errorMessage}" class="alert alert-danger" role="alert">
-			<span th:text="${errorMessage}"></span>
+<body class="d-flex justify-content-center align-items-center vh-100">
+	<div class="card shadow-sm p-4">
+		<div th:if="${loginInvalido}" class="alert alert-danger" role="alert">
+			<span th:text="${loginInvalido}"></span>
 		</div>
-
-		<form action="/login" method="post">
+		<h2 class="card-title text-center mb-4">Inicio de Sesión</h2>
+		<form th:action="@{/login}" method="post" th:object="${usuario}">
 			<div class="form-group">
-				<label for="correo">Correo:</label>
-				<input type="email" class="form-control" id="correo" name="correo" required>
+				<label for="correo">Correo</label>
+				<input th:field="*{correo}" type="email" class="form-control" id="correo"
+					placeholder="Ingrese su correo" required>
 			</div>
 			<div class="form-group">
-				<label for="password">Contraseña:</label>
-				<input type="password" class="form-control" id="password" name="password" required>
+				<label for="password">Contraseña</label>
+				<input th:field="*{password}" type="password" class="form-control" id="password"
+					placeholder="Ingrese su contraseña" required>
 			</div>
-			<button type="submit" class="btn btn-primary">Iniciar Sesión</button>
+			<button type="submit" class="btn btn-primary btn-block">Ingresar</button>
+			<a href="/registrar_usuario" class="d-block text-center mt-3">Registrar Usuario</a>
 		</form>
-	</div>
 
-	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+	</div>
+	<script src="https://code.jquery.com/jquery-3.5.2.slim.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>

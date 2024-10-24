@@ -21,10 +21,6 @@ public class ClienteEntity {
 	@Column(name = "cliente_id")
 	private Integer clienteId;
 
-	@ManyToOne
-	@JoinColumn(name = "usuario_id", nullable = false)
-	private UsuarioEntity usuario;
-
 	@Column(name = "nombre", nullable = false)
 	private String nombre;
 
@@ -46,13 +42,14 @@ public class ClienteEntity {
 	@Column(name = "dni", length = 8)
 	private String dni;
 
-	@Column(name = "correo")
-	private String correo;
+	@ManyToOne
+	@JoinColumn(name = "correo", nullable = false)
+	private UsuarioEntity usuario;
 
 	@Column(name = "fecha_afiliacion")
 	private LocalDate fechaAfiliacion;
 
 	@ManyToOne
-	@JoinColumn(name = "estado_cliente", nullable = false)
-	private EstadoClienteEntity estado;
+	@JoinColumn(name = "estado_cliente_id", nullable = false)
+	private EstadoClienteEntity estadoCliente;
 }

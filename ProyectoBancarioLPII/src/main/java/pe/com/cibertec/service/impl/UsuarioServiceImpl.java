@@ -1,17 +1,20 @@
 package pe.com.cibertec.service.impl;
 
 import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
+import lombok.RequiredArgsConstructor;
 import pe.com.cibertec.model.UsuarioEntity;
 import pe.com.cibertec.repository.UsuarioRepository;
 import pe.com.cibertec.service.UsuarioService;
+import pe.com.cibertec.utils.Utilitarios;
 
 @Service
+@RequiredArgsConstructor
 public class UsuarioServiceImpl implements UsuarioService {
 
-	@Autowired
-	private UsuarioRepository usuarioRepository;
+	private final UsuarioRepository usuarioRepository;
 
 	@Override
 	public List<UsuarioEntity> buscarUsuarios() {
@@ -19,18 +22,34 @@ public class UsuarioServiceImpl implements UsuarioService {
 	}
 
 	@Override
-	public void crearUsuario(UsuarioEntity usuario) {
+	public void crearUsuario(UsuarioEntity usuario, MultipartFile foto) {
+		String nombreFoto = Utilitarios.guardarImagen(foto);
+		usuario.setUrlImagen(nombreFoto);
+		String passwordHash = Utilitarios.extraerHash(usuario.getPassword());
+		usuario.setPassword(passwordHash);
 		usuarioRepository.save(usuario);
 	}
 
 	@Override
-	public UsuarioEntity buscarUsuarioPorId(Integer id) {
-		return usuarioRepository.findById(id).orElse(null);
+	public boolean validarUsuario(UsuarioEntity usuarioFormulario) {
+		UsuarioEntity usuarioEncontrado = usuarioRepository.findByCorreo(usuarioFormulario.getCorreo());
+		if (usuarioEncontrado == null) {
+			return false;
+		}
+		if (!Utilitarios.checkPassword(usuarioFormulario.getPassword(), usuarioEncontrado.getPassword())) {
+			return false;
+		}
+		return true;
 	}
 
 	@Override
-	public void actualizarUsuario(Integer id, UsuarioEntity usuarioActualizado) {
-		UsuarioEntity usuarioEncontrado = buscarUsuarioPorId(id);
+	public UsuarioEntity buscarUsuarioPorCorreo(String correo) {
+		return usuarioRepository.findByCorreo(correo);
+	}
+
+	@Override
+	public void actualizarUsuario(String correo, UsuarioEntity usuarioActualizado) {
+		UsuarioEntity usuarioEncontrado = buscarUsuarioPorCorreo(correo);
 		if (usuarioEncontrado == null) {
 			throw new RuntimeException("Usuario no encontrado");
 		}
@@ -44,8 +63,8 @@ public class UsuarioServiceImpl implements UsuarioService {
 	}
 
 	@Override
-	public void eliminarUsuario(Integer id) {
-		UsuarioEntity usuarioEncontrado = buscarUsuarioPorId(id);
+	public void eliminarUsuario(String correo) {
+		UsuarioEntity usuarioEncontrado = buscarUsuarioPorCorreo(correo);
 		if (usuarioEncontrado == null) {
 			throw new RuntimeException("Usuario no encontrado");
 		}

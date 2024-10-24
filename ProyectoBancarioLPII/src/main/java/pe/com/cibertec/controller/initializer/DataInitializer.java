@@ -10,14 +10,19 @@ import org.springframework.stereotype.Component;
 import pe.com.cibertec.model.TipoUsuarioEntity;
 import pe.com.cibertec.model.UsuarioEntity;
 import pe.com.cibertec.model.ClienteEntity;
+import pe.com.cibertec.model.CuentaEntity;
 import pe.com.cibertec.model.EstadoClienteEntity;
+import pe.com.cibertec.model.EstadoCuentaEntity;
 import pe.com.cibertec.model.TarjetaEntity;
 import pe.com.cibertec.model.TipoCuentaEntity;
 import pe.com.cibertec.model.TipoTarjetaEntity;
 import pe.com.cibertec.repository.TipoUsuarioRepository;
 import pe.com.cibertec.repository.UsuarioRepository;
+import pe.com.cibertec.utils.Utilitarios;
 import pe.com.cibertec.repository.ClienteRepository;
+import pe.com.cibertec.repository.CuentaRepository;
 import pe.com.cibertec.repository.EstadoClienteRepository;
+import pe.com.cibertec.repository.EstadoCuentaRepository;
 import pe.com.cibertec.repository.EstadoTarjetaRepository;
 import pe.com.cibertec.repository.TarjetaRepository;
 import pe.com.cibertec.repository.TipoCuentaRepository;
@@ -49,6 +54,12 @@ public class DataInitializer implements CommandLineRunner {
 
 	@Autowired
 	private EstadoTarjetaRepository estadoTarjetaRepository;
+
+	@Autowired
+	private EstadoCuentaRepository estadoCuentaRepository;
+
+	@Autowired
+	private CuentaRepository cuentaRepository;
 
 	@Override
 	public void run(String... args) throws Exception {
@@ -119,15 +130,25 @@ public class DataInitializer implements CommandLineRunner {
 		// Crear e insertar usuarios
 		UsuarioEntity usuario1 = new UsuarioEntity();
 		usuario1.setCorreo("mau@gmail.com");
-		usuario1.setPassword("12345"); // Asegúrate de encriptar
+		usuario1.setPassword(Utilitarios.extraerHash("12345"));
 		usuario1.setTipoUsuario(admin);
-		usuarioRepository.save(usuario1);
+		usuario1.setUrlImagen("https://mx.pinterest.com/pin/632474341424086584/");
 
 		UsuarioEntity usuario2 = new UsuarioEntity();
 		usuario2.setCorreo("sofi@gmail.com");
-		usuario2.setPassword("12345"); // Asegúrate de encriptar
+		usuario2.setPassword(Utilitarios.extraerHash("12345"));
 		usuario2.setTipoUsuario(usuarioComun);
+		usuario2.setUrlImagen("https://mx.pinterest.com/pin/31666003621401263/");
+
+		UsuarioEntity usuario3 = new UsuarioEntity();
+		usuario3.setCorreo("maria@gmail.com");
+		usuario3.setPassword(Utilitarios.extraerHash("12345"));
+		usuario3.setTipoUsuario(usuarioComun);
+		usuario3.setUrlImagen("https://mx.pinterest.com/pin/31666003621401263/");
+
 		usuarioRepository.save(usuario2);
+		usuarioRepository.save(usuario1);
+		usuarioRepository.save(usuario3);
 
 		// Crear e insertar estados de cliente
 		EstadoClienteEntity estadoActivo = new EstadoClienteEntity();
@@ -151,34 +172,51 @@ public class DataInitializer implements CommandLineRunner {
 		cliente1.setApellidos("Ramirez Esparron");
 		cliente1.setEdad(21);
 		cliente1.setDireccion("AV. mi casa");
+		cliente1.setTelefono("936956726");
 		cliente1.setFechaNacimiento("30/04/2004");
 		cliente1.setDni("72899137");
-		cliente1.setCorreo("mauricio.resparron@gmail.com");
-		cliente1.setFechaAfiliacion(fechaActual);
-		cliente1.setEstado(estadoActivo);
 		cliente1.setUsuario(usuario1);
+		cliente1.setFechaAfiliacion(fechaActual);
+		cliente1.setEstadoCliente(estadoActivo);
 
 		ClienteEntity cliente2 = new ClienteEntity();
 		cliente2.setNombre("Sofi");
 		cliente2.setApellidos("Sanchez Cruz");
 		cliente2.setEdad(20);
 		cliente2.setDireccion("AV. su casa");
+		cliente2.setTelefono("924846123");
 		cliente2.setFechaNacimiento("02/07/2003");
 		cliente2.setDni("12349137");
-		cliente2.setCorreo("sofi@gmail.com");
-		cliente2.setFechaAfiliacion(fechaActual);
-		cliente2.setEstado(estadoActivo);
 		cliente2.setUsuario(usuario2);
+		cliente2.setFechaAfiliacion(fechaActual);
+		cliente2.setEstadoCliente(estadoActivo);
+
+		ClienteEntity cliente3 = new ClienteEntity();
+		cliente3.setNombre("Maria");
+		cliente3.setApellidos("Gomez");
+		cliente3.setEdad(19);
+		cliente3.setDireccion("AV. su casa");
+		cliente3.setTelefono("924846123");
+		cliente3.setFechaNacimiento("02/05/2001");
+		cliente3.setDni("12121212");
+		cliente3.setUsuario(usuario3);
+		cliente3.setFechaAfiliacion(fechaActual);
+		cliente3.setEstadoCliente(estadoActivo);
 
 		clienteRepository.save(cliente1);
 		clienteRepository.save(cliente2);
+		clienteRepository.save(cliente3);
 
 		// Crear e insertar tarjetas
 		Random random = new Random();
 		int cvv = 100 + random.nextInt(900);
 
+		Random random2 = new Random();
+		long numTarjeta = (long) (Math.pow(10, 9)) + (long) (random2.nextDouble() * Math.pow(10, 9));
+		System.out.println(numTarjeta);
+
 		TarjetaEntity tarjeta1 = new TarjetaEntity();
-		tarjeta1.setNumeroTarjeta("1234567890");
+		tarjeta1.setNumeroTarjeta(String.valueOf(numTarjeta));
 		tarjeta1.setFechaActivacion(fechaActual);
 		tarjeta1.setFechaVencimiento(fechaActual.plusYears(6));
 		tarjeta1.setCvv(String.valueOf(cvv));
@@ -186,14 +224,72 @@ public class DataInitializer implements CommandLineRunner {
 		tarjeta1.setTipoTarjeta(tarjetaPremium);
 
 		TarjetaEntity tarjeta2 = new TarjetaEntity();
-		tarjeta2.setNumeroTarjeta("0987654321");
+		tarjeta2.setNumeroTarjeta(String.valueOf(numTarjeta));
 		tarjeta2.setFechaActivacion(fechaActual);
 		tarjeta2.setFechaVencimiento(fechaActual.plusYears(6));
 		tarjeta2.setCvv(String.valueOf(cvv));
 		tarjeta2.setCliente(cliente2);
 		tarjeta2.setTipoTarjeta(tarjetaCredito);
 
+		TarjetaEntity tarjeta3 = new TarjetaEntity();
+		tarjeta3.setNumeroTarjeta(String.valueOf(numTarjeta));
+		tarjeta3.setFechaActivacion(fechaActual);
+		tarjeta3.setFechaVencimiento(fechaActual.plusYears(6));
+		tarjeta3.setCvv(String.valueOf(cvv));
+		tarjeta3.setCliente(cliente3);
+		tarjeta3.setTipoTarjeta(tarjetaCredito);
+
 		tarjetaRepository.save(tarjeta1);
 		tarjetaRepository.save(tarjeta2);
+		tarjetaRepository.save(tarjeta3);
+
+		EstadoCuentaEntity estCuenta1 = new EstadoCuentaEntity();
+		estCuenta1.setDescripcion("Activo");
+
+		EstadoCuentaEntity estCuenta2 = new EstadoCuentaEntity();
+		estCuenta2.setDescripcion("Desactivada");
+
+		EstadoCuentaEntity estCuenta3 = new EstadoCuentaEntity();
+		estCuenta3.setDescripcion("Bloqueada");
+
+		EstadoCuentaEntity estCuenta4 = new EstadoCuentaEntity();
+		estCuenta4.setDescripcion("Vencida");
+
+		estadoCuentaRepository.save(estCuenta1);
+		estadoCuentaRepository.save(estCuenta2);
+		estadoCuentaRepository.save(estCuenta3);
+		estadoCuentaRepository.save(estCuenta4);
+
+		Random random3 = new Random();
+		long numCuenta = (long) (Math.pow(10, 14)) + (long) (random3.nextDouble() * Math.pow(10, 14));
+		System.out.println(numCuenta);
+
+		CuentaEntity cuenta1 = new CuentaEntity();
+		cuenta1.setFechaApertura(fechaActual);
+		cuenta1.setNumeroCuenta(String.valueOf(numCuenta));
+		cuenta1.setSaldo(200.50);
+		cuenta1.setCliente(cliente1);
+		cuenta1.setEstadoCuenta(estCuenta1);
+		cuenta1.setTipoCuenta(cuentaEmpresarial);
+
+		CuentaEntity cuenta2 = new CuentaEntity();
+		cuenta2.setFechaApertura(fechaActual);
+		cuenta2.setNumeroCuenta(String.valueOf(numCuenta));
+		cuenta2.setSaldo(5000.20);
+		cuenta2.setCliente(cliente2);
+		cuenta2.setEstadoCuenta(estCuenta1);
+		cuenta2.setTipoCuenta(cuentaAhorros);
+
+		CuentaEntity cuenta3 = new CuentaEntity();
+		cuenta3.setFechaApertura(fechaActual);
+		cuenta3.setNumeroCuenta(String.valueOf(numCuenta));
+		cuenta3.setSaldo(2500.00);
+		cuenta3.setCliente(cliente3);
+		cuenta3.setEstadoCuenta(estCuenta1);
+		cuenta3.setTipoCuenta(cuentaPlazoFijo);
+
+		cuentaRepository.save(cuenta1);
+		cuentaRepository.save(cuenta2);
+		cuentaRepository.save(cuenta3);
 	}
 }

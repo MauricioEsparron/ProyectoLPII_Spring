@@ -7,12 +7,69 @@
 	<title>Home - Banco</title>
 	<!-- Enlace a Bootstrap CSS -->
 	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+	<style>
+		body {
+			background-image: url('/img/img1.jpg');
+			background-size: cover;
+			background-position: center;
+			background-repeat: no-repeat;
+			font-family: 'Helvetica Neue', 'Arial', sans-serif;
+			color: #333;
+			margin: 0;
+			padding: 0;
+			padding-top: 56px;
+			/* Espacio para la cabecera fija */
+		}
+
+		.navbar {
+			padding-top: 0px;
+			/* Espacio superior ajustado */
+			padding-bottom: 8px;
+			/* Espacio inferior ajustado */
+		}
+
+		.container {
+			max-width: 800px;
+			margin-top: 1rem;
+		}
+
+		/* Estilo para el chatbot flotante */
+		.chatbot {
+			position: fixed;
+			bottom: 20px;
+			right: 20px;
+			/* En la parte derecha */
+			width: 250px;
+			/* Ancho más pequeño */
+			background-color: rgba(255, 255, 255, 0.9);
+			border-radius: 10px;
+			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+			padding: 10px;
+			/* Espaciado interno reducido */
+			z-index: 1000;
+		}
+
+		.chatbot h5 {
+			font-size: 1.2em;
+			/* Tamaño de fuente más pequeño para el título */
+		}
+
+		.chatbot input {
+			font-size: 0.9em;
+			/* Tamaño de fuente más pequeño para el input */
+		}
+
+		.chatbot button {
+			font-size: 0.9em;
+			/* Tamaño de fuente más pequeño para el botón */
+		}
+	</style>
 </head>
 
 <body>
 
-	<!-- Cabecera -->
-	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+	<!-- Cabecera fija -->
+	<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
 		<div class="container">
 			<a class="navbar-brand" href="#">BANCO</a>
 			<div class="collapse navbar-collapse justify-content-end">
@@ -26,21 +83,46 @@
 					<li class="nav-item">
 						<a class="nav-link" href="/logout">Log Out</a>
 					</li>
-
 				</ul>
 			</div>
 		</div>
 	</nav>
 
-	<!-- Contenido principal -->
-	<div class="container mt-5">
-		<h1>Bienvenido al Banco</h1>
-		<p>Este es un ejemplo de la página de inicio.</p>
+	<!-- Texto fijo -->
+	<div class="container text-center mt-5">
+		<div id="typewriter">Página de gestión bancaria...</div>
+	</div>
+
+	<!-- Sección de Seguridad y Confianza -->
+	<div class="container text-center">
+		<h2>Seguridad y Confianza</h2>
+		<p>Estamos comprometidos con la seguridad de tus datos.</p>
+	</div>
+
+	<!-- Sección de Feedback del Usuario -->
+	<div class="container">
+		<h2>Tu Opinión es Importante</h2>
+		<form>
+			<div class="form-group">
+				<label for="feedback">Déjanos tu comentario:</label>
+				<textarea class="form-control" id="feedback" rows="3"
+					placeholder="Escribe tu feedback aquí..."></textarea>
+			</div>
+			<button type="submit" class="btn btn-success">Enviar Feedback</button>
+		</form>
+	</div>
+
+	<!-- Chat bot Flotante -->
+	<div class="chatbot">
+		<h5>Asistente Virtual</h5>
+		<p>¿Tienes alguna pregunta? Pregúntame aquí:</p>
+		<input type="text" class="form-control" placeholder="Escribe tu pregunta...">
+		<button class="btn btn-primary mt-2">Enviar</button>
 	</div>
 
 	<!-- Enlace a Bootstrap JS y jQuery -->
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core @2.9.2/dist/umd/popper.min.js"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 

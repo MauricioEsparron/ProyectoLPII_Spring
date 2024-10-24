@@ -1,5 +1,7 @@
 package pe.com.cibertec.model;
 
+import java.time.LocalDate;
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -26,7 +28,7 @@ public class CuentaEntity {
 	private Double saldo;
 
 	@Column(name = "fecha_apertura", nullable = false)
-	private String fechaApertura;
+	private LocalDate fechaApertura;
 
 	@ManyToOne
 	@JoinColumn(name = "cliente_id", nullable = false)
@@ -36,6 +38,7 @@ public class CuentaEntity {
 	@JoinColumn(name = "tipo_cuenta_id", nullable = false)
 	private TipoCuentaEntity tipoCuenta;
 
-	@Column(name = "estado")
-	private String estado;
+	@ManyToOne
+	@JoinColumn(name = "estado_cuenta")
+	private EstadoCuentaEntity estadoCuenta;
 }

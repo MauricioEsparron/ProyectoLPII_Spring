@@ -1,16 +1,21 @@
 package pe.com.cibertec.service;
 
 import java.util.List;
+
+import org.springframework.web.multipart.MultipartFile;
+
 import pe.com.cibertec.model.UsuarioEntity;
 
 public interface UsuarioService {
 	List<UsuarioEntity> buscarUsuarios();
 
-	void crearUsuario(UsuarioEntity usuario);
+	void crearUsuario(UsuarioEntity usuarioEntity, MultipartFile foto);
 
-	UsuarioEntity buscarUsuarioPorId(Integer id);
+	boolean validarUsuario(UsuarioEntity usuarioEntity);
 
-	void actualizarUsuario(Integer id, UsuarioEntity usuarioEntity);
+	void actualizarUsuario(String correo, UsuarioEntity usuarioEntity);
 
-	void eliminarUsuario(Integer id);
+	void eliminarUsuario(String correo);
+
+	UsuarioEntity buscarUsuarioPorCorreo(String correo);
 }

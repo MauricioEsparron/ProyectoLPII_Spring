@@ -41,9 +41,9 @@ public class ClienteServiceImpl implements ClienteService {
 			clienteEncontrado.setDireccion(clienteActualizado.getDireccion());
 			clienteEncontrado.setFechaNacimiento(clienteActualizado.getFechaNacimiento());
 			clienteEncontrado.setDni(clienteActualizado.getDni());
-			clienteEncontrado.setCorreo(clienteActualizado.getCorreo());
+			clienteEncontrado.setUsuario(clienteActualizado.getUsuario());
 //			clienteEncontrado.setFechaAfiliacion(clienteActualizado.getFechaAfiliacion());
-			clienteEncontrado.setEstado(clienteActualizado.getEstado());
+			clienteEncontrado.setEstadoCliente(clienteActualizado.getEstadoCliente());
 
 			clienteRepository.save(clienteEncontrado);
 		} catch (Exception e) {

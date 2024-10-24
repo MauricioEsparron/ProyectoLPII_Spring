@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import pe.com.cibertec.model.CuentaEntity;
+import pe.com.cibertec.model.EstadoCuentaEntity;
 import pe.com.cibertec.model.TipoCuentaEntity;
 import pe.com.cibertec.service.CuentaService;
+import pe.com.cibertec.service.EstadoCuentaService;
 import pe.com.cibertec.service.TipoCuentaService;
 
 @Controller
@@ -25,6 +27,9 @@ public class CuentaController {
 	@Autowired
 	private TipoCuentaService tipoCuentaService;
 
+	@Autowired
+	private EstadoCuentaService estadoCuentaService;
+
 	@GetMapping("/")
 	public String listarCuentas(Model model) {
 		List<CuentaEntity> listaCuentas = cuentaService.buscarCuentas();
@@ -35,6 +40,12 @@ public class CuentaController {
 	@GetMapping("/registrar_cuenta")
 	public String mostrarRegistrarCuenta(Model model) {
 		model.addAttribute("cuenta", new CuentaEntity());
+
+		List<TipoCuentaEntity> listaTipoCuenta = tipoCuentaService.buscarTiposCuenta();
+		model.addAttribute("lista_tiposCuenta", listaTipoCuenta);
+		List<EstadoCuentaEntity> listaEstadoCuenta = estadoCuentaService.buscarEstadoCuentas();
+		model.addAttribute("lista_estadosCuenta", listaEstadoCuenta);
+
 		return "registrar_cuenta";
 	}
 

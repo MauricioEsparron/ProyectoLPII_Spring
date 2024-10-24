@@ -16,21 +16,20 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "tb_estado_cliente")
+@Table(name = "tb_estado_cuenta")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class EstadoClienteEntity {
-
+public class EstadoCuentaEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "estado_cliente_id", nullable = false)
-	private Integer estadoClienteId;
+	@Column(name = "estado_cuenta_id", nullable = false)
+	private Integer estadoCuentaId;
 
 	@Column(name = "descripcion", nullable = false)
 	private String descripcion;
 
-	@OneToMany(mappedBy = "estadoCliente", cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<ClienteEntity> clientes;
+	@OneToMany(mappedBy = "estadoCuenta", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<CuentaEntity> cuentas;
 }

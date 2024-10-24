@@ -15,14 +15,14 @@ import lombok.Setter;
 public class UsuarioEntity {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer usuarioId;
-
 	@Column(name = "correo", nullable = false, unique = true)
 	private String correo;
 
 	@Column(name = "password", nullable = false)
 	private String password;
+
+	@Column(name = "url_imagen")
+	private String urlImagen;
 
 	@ManyToOne
 	@JoinColumn(name = "tipo_usuario_id", nullable = false)

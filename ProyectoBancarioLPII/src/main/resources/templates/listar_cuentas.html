@@ -1,50 +1,56 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de Cuentas</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-</head>
-<body>
-    <div class="container">
-        <h2>Lista de Cuentas</h2>
-        <a th:href="@{/cuentas/registrar_cuenta}" class="btn btn-primary">Registrar Cuenta</a>
-        
-        <table class="table mt-4">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Número de Cuenta</th>
-                    <th>Saldo</th>
-                    <th>Fecha de Apertura</th>
-                    <th>Cliente</th>
-                    <th>Tipo de Cuenta</th>
-                    <th>Estado</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr th:each="cuenta : ${lista_cuentas}">
-                    <td th:text="${cuenta.cuentaId}"></td>
-                    <td th:text="${cuenta.numeroCuenta}"></td>
-                    <td th:text="${cuenta.saldo}"></td>
-                    <td th:text="${cuenta.fechaApertura}"></td>
-                    <td th:text="${cuenta.cliente.nombre}"></td> <!-- Asegúrate de que 'nombre' sea un campo válido en ClienteEntity -->
-                    <td th:text="${cuenta.tipoCuenta.descripcion}"></td> <!-- Asegúrate de que 'descripcion' sea un campo válido en TipoCuentaEntity -->
-                    <td th:text="${cuenta.estado}"></td>
-                    <td>
-                        <a th:href="@{/cuentas/detalle_cuenta/{id}(id=${cuenta.cuentaId})}" class="btn btn-info">Ver</a> |
-                        <a th:href="@{/cuentas/editar_cuenta/{id}(id=${cuenta.cuentaId})}" class="btn btn-warning">Editar</a> |
-                        <a th:href="@{/cuentas/delete_cuenta/{id}(id=${cuenta.cuentaId})}" class="btn btn-danger">Eliminar</a>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Lista de Cuentas</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+
+<body>
+	<div class="container">
+		<h2>Lista de Cuentas</h2>
+		<a th:href="@{/cuentas/registrar_cuenta}" class="btn btn-primary">Registrar Cuenta</a>
+
+		<table class="table mt-4">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Número de Cuenta</th>
+					<th>Saldo</th>
+					<th>Fecha de Apertura</th>
+					<th>Cliente</th>
+					<th>Tipo de Cuenta</th>
+					<th>Estado cuenta</th>
+					<th>Acciones</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="cuenta : ${lista_cuentas}">
+					<td th:text="${cuenta.cuentaId}"></td>
+					<td th:text="${cuenta.numeroCuenta}"></td>
+					<td th:text="${cuenta.saldo}"></td>
+					<td th:text="${cuenta.fechaApertura}"></td>
+					<td th:text="${cuenta.cliente.nombre}"></td>
+					<td th:text="${cuenta.tipoCuenta.descripcion}"></td>
+					<td th:text="${cuenta.estadoCuenta.descripcion}"></td>
+					<td>
+						<a th:href="@{/cuentas/detalle_cuenta/{id}(id=${cuenta.cuentaId})}" class="btn btn-info">Ver</a>
+						|
+						<a th:href="@{/cuentas/editar_cuenta/{id}(id=${cuenta.cuentaId})}"
+							class="btn btn-warning">Editar</a> |
+						<a th:href="@{/cuentas/delete_cuenta/{id}(id=${cuenta.cuentaId})}"
+							class="btn btn-danger">Eliminar</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
+
 </html>

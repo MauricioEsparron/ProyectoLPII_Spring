@@ -5,6 +5,8 @@ import org.springframework.stereotype.Repository;
 import pe.com.cibertec.model.UsuarioEntity;
 
 @Repository
-public interface UsuarioRepository extends JpaRepository<UsuarioEntity, Integer> {
+public interface UsuarioRepository extends JpaRepository<UsuarioEntity, String> {
+
+	UsuarioEntity findByCorreo(String correo);
 
 }
