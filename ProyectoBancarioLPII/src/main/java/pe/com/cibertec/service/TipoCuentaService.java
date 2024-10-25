@@ -1,7 +1,8 @@
 package pe.com.cibertec.service;
 
 import java.util.List;
-import pe.com.cibertec.model.TipoCuentaEntity;
+
+import pe.com.cibertec.model.entity.TipoCuentaEntity;
 
 
 public interface TipoCuentaService {

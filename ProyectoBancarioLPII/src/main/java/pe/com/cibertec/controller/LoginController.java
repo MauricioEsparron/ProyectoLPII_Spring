@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
-import pe.com.cibertec.model.UsuarioEntity;
+import pe.com.cibertec.model.entity.UsuarioEntity;
 import pe.com.cibertec.service.UsuarioService;
 
 @Controller

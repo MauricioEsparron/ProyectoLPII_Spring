@@ -3,7 +3,8 @@ package pe.com.cibertec.service.impl;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pe.com.cibertec.model.ClienteEntity;
+
+import pe.com.cibertec.model.entity.ClienteEntity;
 import pe.com.cibertec.repository.ClienteRepository;
 import pe.com.cibertec.service.ClienteService;
 

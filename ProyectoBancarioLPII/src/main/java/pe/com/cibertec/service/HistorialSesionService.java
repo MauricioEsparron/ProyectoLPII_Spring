@@ -1,7 +1,8 @@
 package pe.com.cibertec.service;
 
 import java.util.List;
-import pe.com.cibertec.model.HistorialSesionEntity;
+
+import pe.com.cibertec.model.entity.HistorialSesionEntity;
 
 public interface HistorialSesionService {
     List<HistorialSesionEntity> buscarHistorialSesiones();

@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import pe.com.cibertec.model.AuditoriaEntity;
+import pe.com.cibertec.model.entity.AuditoriaEntity;
 import pe.com.cibertec.service.AuditoriaService;
 
 @Controller

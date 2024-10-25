@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import pe.com.cibertec.model.CuentaEntity;
-import pe.com.cibertec.model.EstadoCuentaEntity;
-import pe.com.cibertec.model.TipoCuentaEntity;
+import pe.com.cibertec.model.entity.CuentaEntity;
+import pe.com.cibertec.model.entity.EstadoCuentaEntity;
+import pe.com.cibertec.model.entity.TipoCuentaEntity;
 import pe.com.cibertec.service.CuentaService;
 import pe.com.cibertec.service.EstadoCuentaService;
 import pe.com.cibertec.service.TipoCuentaService;

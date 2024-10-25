@@ -1,4 +1,4 @@
-package pe.com.cibertec.model;
+package pe.com.cibertec.model.entity;
 
 import java.time.LocalDate;
 import java.util.List; // Importante para la relación uno a muchos

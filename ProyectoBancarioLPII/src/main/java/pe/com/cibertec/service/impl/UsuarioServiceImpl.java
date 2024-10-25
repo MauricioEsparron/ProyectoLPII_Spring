@@ -4,7 +4,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
-import pe.com.cibertec.model.UsuarioEntity;
+import pe.com.cibertec.model.entity.UsuarioEntity;
 import pe.com.cibertec.repository.UsuarioRepository;
 import pe.com.cibertec.service.UsuarioService;
 import pe.com.cibertec.utils.Utilitarios;

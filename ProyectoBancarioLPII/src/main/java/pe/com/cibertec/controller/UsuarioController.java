@@ -1,9 +1,9 @@
 package pe.com.cibertec.controller;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+//import java.io.IOException;
+//import java.nio.file.Files;
+//import java.nio.file.Path;
+//import java.nio.file.Paths;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import jakarta.servlet.http.HttpSession;
-import pe.com.cibertec.model.UsuarioEntity;
+import pe.com.cibertec.model.entity.UsuarioEntity;
 import pe.com.cibertec.service.UsuarioService;
 
 @Controller
@@ -43,38 +43,38 @@ public class UsuarioController {
 
 	@PostMapping("/registrar_usuario")
 	public String registrarUsuario(@ModelAttribute("usuario") UsuarioEntity usuario, Model model,
-			@RequestParam("file") MultipartFile file) {
+			@RequestParam("foto") MultipartFile foto) {
 
-		if (!file.isEmpty()) {
-			String imagenUrl = almacenarImagen(file);
-			usuario.setUrlImagen(imagenUrl);
-		}
+//		if (!foto.isEmpty()) {
+//			String imagenUrl = almacenarImagen(foto);
+//			usuario.setUrlImagen(imagenUrl);
+//		}
 		usuarioService.crearUsuario(usuario);
 		return "redirect:/productos/";
 	}
 
-	private String almacenarImagen(MultipartFile file) {
-		// Define la ruta donde quieres guardar la imagen
-		String directorioDestino = "src/main/resources/static/images";
-		String nombreArchivo = file.getOriginalFilename();
-		Path rutaDestino = Paths.get(directorioDestino, nombreArchivo);
-		int contador = 1;
-		while (Files.exists(rutaDestino)) {
-			String nuevoNombreArchivo = nombreArchivo.substring(0, nombreArchivo.lastIndexOf('.')) + "_" + contador
-					+ nombreArchivo.substring(nombreArchivo.lastIndexOf('.'));
-			rutaDestino = Paths.get(directorioDestino, nuevoNombreArchivo);
-			contador++;
-		}
-
-		try {
-			Files.createDirectories(rutaDestino.getParent());
-			Files.copy(file.getInputStream(), rutaDestino);
-			return "/images/" + rutaDestino.getFileName().toString();
-		} catch (IOException e) {
-			e.printStackTrace();
-			return null;
-		}
-	}
+//	private String almacenarImagen(MultipartFile file) {
+//		// Define la ruta donde quieres guardar la imagen
+//		String directorioDestino = "src/main/resources/static/images";
+//		String nombreArchivo = file.getOriginalFilename();
+//		Path rutaDestino = Paths.get(directorioDestino, nombreArchivo);
+//		int contador = 1;
+//		while (Files.exists(rutaDestino)) {
+//			String nuevoNombreArchivo = nombreArchivo.substring(0, nombreArchivo.lastIndexOf('.')) + "_" + contador
+//					+ nombreArchivo.substring(nombreArchivo.lastIndexOf('.'));
+//			rutaDestino = Paths.get(directorioDestino, nuevoNombreArchivo);
+//			contador++;
+//		}
+//
+//		try {
+//			Files.createDirectories(rutaDestino.getParent());
+//			Files.copy(file.getInputStream(), rutaDestino);
+//			return "/images/" + rutaDestino.getFileName().toString();
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//			return null;
+//		}
+//	}
 
 	@GetMapping("/detalle_usuario/{id}")
 	public String verDetalle(Model model, @PathVariable("id") String correo) {

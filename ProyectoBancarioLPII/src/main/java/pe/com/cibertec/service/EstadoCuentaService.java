@@ -2,7 +2,7 @@ package pe.com.cibertec.service;
 
 import java.util.List;
 
-import pe.com.cibertec.model.EstadoCuentaEntity;
+import pe.com.cibertec.model.entity.EstadoCuentaEntity;
 
 public interface EstadoCuentaService {
 

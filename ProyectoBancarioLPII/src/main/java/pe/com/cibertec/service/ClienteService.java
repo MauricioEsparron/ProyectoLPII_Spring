@@ -1,7 +1,8 @@
 package pe.com.cibertec.service;
 
 import java.util.List;
-import pe.com.cibertec.model.ClienteEntity;
+
+import pe.com.cibertec.model.entity.ClienteEntity;
 
 public interface ClienteService {
     List<ClienteEntity> buscarClientes();

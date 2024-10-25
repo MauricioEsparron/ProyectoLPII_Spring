@@ -1,7 +1,8 @@
 package pe.com.cibertec.service;
 
 import java.util.List;
-import pe.com.cibertec.model.OperacionEntity;
+
+import pe.com.cibertec.model.entity.OperacionEntity;
 
 public interface OperacionService {
     List<OperacionEntity> buscarOperaciones();

@@ -2,7 +2,7 @@ package pe.com.cibertec.service;
 
 import java.util.List;
 
-import pe.com.cibertec.model.UsuarioEntity;
+import pe.com.cibertec.model.entity.UsuarioEntity;
 
 public interface UsuarioService {
 	List<UsuarioEntity> buscarUsuarios();

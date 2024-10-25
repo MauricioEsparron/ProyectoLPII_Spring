@@ -2,7 +2,7 @@ package pe.com.cibertec.service;
 
 import java.util.List;
 
-import pe.com.cibertec.model.EstadoTarjetaEntity;
+import pe.com.cibertec.model.entity.EstadoTarjetaEntity;
 
 public interface EstadoTarjetaService {
 	List<EstadoTarjetaEntity> buscarEstadoTarjetas();

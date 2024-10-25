@@ -48,8 +48,8 @@
 				<label for="estado">Estado</label>
 				<select class="form-control" id="estado" name="estado" required>
 					<option value="">Seleccione un estado</option>
-					<!-- Opciones de estado -->
-					<option th:each="estado : ${lista_estados}" th:value="${estado.id}" th:text="${estado.nombre}">
+					<option th:each="estado : ${listarEstadoCliente}" th:value="${estado.estadoClienteId}"
+						th:text="${estado.descripcion}">
 					</option>
 				</select>
 			</div>

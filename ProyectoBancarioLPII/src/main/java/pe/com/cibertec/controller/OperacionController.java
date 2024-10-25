@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import pe.com.cibertec.model.OperacionEntity;
+import pe.com.cibertec.model.entity.OperacionEntity;
 import pe.com.cibertec.service.OperacionService;
 
 @Controller

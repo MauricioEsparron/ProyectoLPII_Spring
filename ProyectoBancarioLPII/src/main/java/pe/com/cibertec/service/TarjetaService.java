@@ -1,7 +1,8 @@
 package pe.com.cibertec.service;
 
 import java.util.List;
-import pe.com.cibertec.model.TarjetaEntity;
+
+import pe.com.cibertec.model.entity.TarjetaEntity;
 
 public interface TarjetaService {
     List<TarjetaEntity> buscarTarjetas();

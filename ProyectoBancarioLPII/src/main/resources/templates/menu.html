@@ -7,6 +7,19 @@
 	<title>Gestión de Productos</title>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 	<style>
+		body {
+			background-image: url('/img/img1.jpg');
+			background-size: cover;
+			background-position: center;
+			background-repeat: no-repeat;
+			font-family: 'Helvetica Neue', 'Arial', sans-serif;
+			margin: 0;
+			color: (255, 255, 255, 0.9);
+			padding: 0;
+			padding-top: 56px;
+			/* Espacio para la cabecera fija */
+		}
+
 		/* Efecto escalera para el menú desplegable */
 		.dropdown-menu {
 			animation: fadeIn 0.3s ease-in-out;
@@ -69,6 +82,10 @@
 		.dropdown-submenu:hover .dropdown-menu {
 			display: block;
 			/* Mostrar al pasar el ratón */
+		}
+
+		.pintar {
+			color: rgba(255, 255, 255, 0.9);
 		}
 	</style>
 </head>
@@ -133,15 +150,15 @@
 
 
 		<li class="nav-item">
-			<a class="nav-link" href="#">Otra Opción</a>
+			<a class="nav-link" href="#">Log </a>
 		</li>
 		</ul>
 		</div>
 	</nav>
 
 	<div class="container mt-4">
-		<h1>Bienvenido a la Gestión de datos Bancarios</h1>
-		<p>Selecciona una opción del menú para continuar.</p>
+		<h1 class="pintar">Bienvenido a la Gestión de datos Bancarios</h1>
+		<p class="pintar">Selecciona una opción del menú para continuar.</p>
 	</div>
 
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

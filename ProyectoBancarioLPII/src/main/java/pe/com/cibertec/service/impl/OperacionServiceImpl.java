@@ -3,7 +3,8 @@ package pe.com.cibertec.service.impl;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pe.com.cibertec.model.OperacionEntity; // Usar el nombre correcto de la entidad
+
+import pe.com.cibertec.model.entity.OperacionEntity;
 import pe.com.cibertec.repository.OperacionRepository; // Cambiar a OperacionRepository
 import pe.com.cibertec.service.OperacionService; // Usar el nombre correcto de la interfaz
 

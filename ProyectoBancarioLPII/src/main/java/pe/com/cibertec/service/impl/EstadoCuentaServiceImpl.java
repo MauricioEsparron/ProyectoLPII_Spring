@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import pe.com.cibertec.model.EstadoCuentaEntity;
+import pe.com.cibertec.model.entity.EstadoCuentaEntity;
 import pe.com.cibertec.repository.EstadoCuentaRepository;
 import pe.com.cibertec.service.EstadoCuentaService;
 
@@ -38,10 +38,10 @@ public class EstadoCuentaServiceImpl implements EstadoCuentaService {
 		}
 		try {
 			estadoCuentaEncontrado.setDescripcion(estadocuentaActualizado.getDescripcion());
+			estadoCuentaRepository.save(estadoCuentaEncontrado);
 		} catch (Exception e) {
-			throw new RuntimeException("Error al actualizar el estado  cuenta", e);
+			throw new RuntimeException("Error al actualizar el estado cuenta", e);
 		}
-
 	}
 
 	@Override

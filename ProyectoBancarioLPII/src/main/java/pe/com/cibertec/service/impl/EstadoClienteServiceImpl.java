@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import pe.com.cibertec.model.EstadoClienteEntity;
+import pe.com.cibertec.model.entity.EstadoClienteEntity;
 import pe.com.cibertec.repository.EstadoClienteRepository;
 import pe.com.cibertec.service.EstadoClienteService;
 
@@ -13,7 +13,7 @@ import pe.com.cibertec.service.EstadoClienteService;
 public class EstadoClienteServiceImpl implements EstadoClienteService {
 
 	@Autowired
-	EstadoClienteRepository estadoClienteRepository;
+	private EstadoClienteRepository estadoClienteRepository;
 
 	@Override
 	public List<EstadoClienteEntity> buscarEstadoClientes() {
@@ -38,7 +38,7 @@ public class EstadoClienteServiceImpl implements EstadoClienteService {
 		}
 		try {
 			estadoClienteEncontrado.setDescripcion(estadoclienteActualizado.getDescripcion());
-
+			estadoClienteRepository.save(estadoClienteEncontrado);
 		} catch (Exception e) {
 			throw new RuntimeException("Error al actualizar el estado cliente", e);
 		}
@@ -52,5 +52,4 @@ public class EstadoClienteServiceImpl implements EstadoClienteService {
 		}
 		estadoClienteRepository.delete(estadoClienteEncontrado);
 	}
-
 }

@@ -14,8 +14,8 @@
 			background-position: center;
 			background-repeat: no-repeat;
 			font-family: 'Helvetica Neue', 'Arial', sans-serif;
-			color: #333;
 			margin: 0;
+			color: (255, 255, 255, 0.9);
 			padding: 0;
 			padding-top: 56px;
 			/* Espacio para la cabecera fija */
@@ -63,6 +63,10 @@
 			font-size: 0.9em;
 			/* Tamaño de fuente más pequeño para el botón */
 		}
+
+		.pintar {
+			color: rgba(255, 255, 255, 0.9);
+		}
 	</style>
 </head>
 
@@ -90,21 +94,21 @@
 
 	<!-- Texto fijo -->
 	<div class="container text-center mt-5">
-		<div id="typewriter">Página de gestión bancaria...</div>
+		<div id="typewriter" class="pintar">Página de gestión bancaria...</div>
 	</div>
 
 	<!-- Sección de Seguridad y Confianza -->
 	<div class="container text-center">
-		<h2>Seguridad y Confianza</h2>
-		<p>Estamos comprometidos con la seguridad de tus datos.</p>
+		<h2 class="pintar">Seguridad y Confianza</h2>
+		<p class="pintar">Estamos comprometidos con la seguridad de tus datos.</p>
 	</div>
 
 	<!-- Sección de Feedback del Usuario -->
 	<div class="container">
-		<h2>Tu Opinión es Importante</h2>
+		<h2 class="pintar">Tu Opinión es Importante</h2>
 		<form>
 			<div class="form-group">
-				<label for="feedback">Déjanos tu comentario:</label>
+				<label class="pintar" for="feedback">Déjanos tu comentario:</label>
 				<textarea class="form-control" id="feedback" rows="3"
 					placeholder="Escribe tu feedback aquí..."></textarea>
 			</div>

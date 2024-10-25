@@ -1,4 +1,4 @@
-package pe.com.cibertec.model;
+package pe.com.cibertec.model.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -27,4 +27,5 @@ public class UsuarioEntity {
 	@ManyToOne
 	@JoinColumn(name = "tipo_usuario_id", nullable = false)
 	private TipoUsuarioEntity tipoUsuario;
+	
 }
