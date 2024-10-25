@@ -2,7 +2,6 @@ package pe.com.cibertec.service.impl;
 
 import java.util.List;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import lombok.RequiredArgsConstructor;
 import pe.com.cibertec.model.UsuarioEntity;
@@ -22,9 +21,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 	}
 
 	@Override
-	public void crearUsuario(UsuarioEntity usuario, MultipartFile foto) {
-		String nombreFoto = Utilitarios.guardarImagen(foto);
-		usuario.setUrlImagen(nombreFoto);
+	public void crearUsuario(UsuarioEntity usuario) {
 		String passwordHash = Utilitarios.extraerHash(usuario.getPassword());
 		usuario.setPassword(passwordHash);
 		usuarioRepository.save(usuario);

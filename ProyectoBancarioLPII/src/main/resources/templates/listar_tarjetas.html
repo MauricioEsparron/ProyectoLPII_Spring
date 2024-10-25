@@ -30,7 +30,7 @@
                     <td th:text="${tarjeta.fechaVencimiento}"></td>
                     <td th:text="${tarjeta.cvv}"></td>
                     <td th:text="${tarjeta.tipoTarjeta.descripcion}"></td> <!-- Asegúrate de que 'descripcion' sea un campo válido en TipoTarjetaEntity -->
-                    <td th:text="${tarjeta.estado}"></td>
+                    <td th:text="${tarjeta.estadoTajeta}"></td>
                     <td>
                         <a th:href="@{/tarjetas/detalle_tarjeta/{id}(id=${tarjeta.tarjetaId})}" class="btn btn-info">Ver</a> |
                         <a th:href="@{/tarjetas/editar_tarjeta/{id}(id=${tarjeta.tarjetaId})}" class="btn btn-warning">Editar</a> |

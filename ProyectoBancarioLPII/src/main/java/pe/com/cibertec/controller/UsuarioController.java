@@ -1,5 +1,9 @@
 package pe.com.cibertec.controller;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +31,7 @@ public class UsuarioController {
 	@GetMapping("/")
 	public String listarUsuario(Model model) {
 		List<UsuarioEntity> listaUsuario = usuarioService.buscarUsuarios();
-		model.addAttribute("lista_usuario", listaUsuario);
+		model.addAttribute("lista_usuarios", listaUsuario);
 		return "listar_usuarios";
 	}
 
@@ -39,13 +43,36 @@ public class UsuarioController {
 
 	@PostMapping("/registrar_usuario")
 	public String registrarUsuario(@ModelAttribute("usuario") UsuarioEntity usuario, Model model,
-			@RequestParam("foto") MultipartFile foto) {
+			@RequestParam("file") MultipartFile file) {
+
+		if (!file.isEmpty()) {
+			String imagenUrl = almacenarImagen(file);
+			usuario.setUrlImagen(imagenUrl);
+		}
+		usuarioService.crearUsuario(usuario);
+		return "redirect:/productos/";
+	}
+
+	private String almacenarImagen(MultipartFile file) {
+		// Define la ruta donde quieres guardar la imagen
+		String directorioDestino = "src/main/resources/static/images";
+		String nombreArchivo = file.getOriginalFilename();
+		Path rutaDestino = Paths.get(directorioDestino, nombreArchivo);
+		int contador = 1;
+		while (Files.exists(rutaDestino)) {
+			String nuevoNombreArchivo = nombreArchivo.substring(0, nombreArchivo.lastIndexOf('.')) + "_" + contador
+					+ nombreArchivo.substring(nombreArchivo.lastIndexOf('.'));
+			rutaDestino = Paths.get(directorioDestino, nuevoNombreArchivo);
+			contador++;
+		}
+
 		try {
-			usuarioService.crearUsuario(usuario, foto);
-			return "redirect:/usuarios/";
-		} catch (Exception e) {
-			model.addAttribute("error", "Error al registrar el usuario: " + e.getMessage());
-			return "registrar_usuario";
+			Files.createDirectories(rutaDestino.getParent());
+			Files.copy(file.getInputStream(), rutaDestino);
+			return "/images/" + rutaDestino.getFileName().toString();
+		} catch (IOException e) {
+			e.printStackTrace();
+			return null;
 		}
 	}
 

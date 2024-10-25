@@ -2,55 +2,77 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Lista de Cuentas</title>
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Cuentas</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 
 <body>
-	<div class="container">
-		<h2>Lista de Cuentas</h2>
-		<a th:href="@{/cuentas/registrar_cuenta}" class="btn btn-primary">Registrar Cuenta</a>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" th:href="@{/}">Home</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-		<table class="table mt-4">
-			<thead>
-				<tr>
-					<th>ID</th>
-					<th>Número de Cuenta</th>
-					<th>Saldo</th>
-					<th>Fecha de Apertura</th>
-					<th>Cliente</th>
-					<th>Tipo de Cuenta</th>
-					<th>Estado cuenta</th>
-					<th>Acciones</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr th:each="cuenta : ${lista_cuentas}">
-					<td th:text="${cuenta.cuentaId}"></td>
-					<td th:text="${cuenta.numeroCuenta}"></td>
-					<td th:text="${cuenta.saldo}"></td>
-					<td th:text="${cuenta.fechaApertura}"></td>
-					<td th:text="${cuenta.cliente.nombre}"></td>
-					<td th:text="${cuenta.tipoCuenta.descripcion}"></td>
-					<td th:text="${cuenta.estadoCuenta.descripcion}"></td>
-					<td>
-						<a th:href="@{/cuentas/detalle_cuenta/{id}(id=${cuenta.cuentaId})}" class="btn btn-info">Ver</a>
-						|
-						<a th:href="@{/cuentas/editar_cuenta/{id}(id=${cuenta.cuentaId})}"
-							class="btn btn-warning">Editar</a> |
-						<a th:href="@{/cuentas/delete_cuenta/{id}(id=${cuenta.cuentaId})}"
-							class="btn btn-danger">Eliminar</a>
-					</td>
-				</tr>
-			</tbody>
-		</table>
-	</div>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" th:href="@{/cuentas}">Cuentas <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Opciones
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" th:href="@{/cuentas/registrar_cuenta}">Registrar Cuenta</a>
+                        <a class="dropdown-item" th:href="@{/cuentas/lista_cuentas}">Lista de Cuentas</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
 
-	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <div class="container">
+        <h2>Lista de Cuentas</h2>
+        <a th:href="@{/cuentas/registrar_cuenta}" class="btn btn-primary">Registrar Cuenta</a>
+
+        <table class="table mt-4">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Número de Cuenta</th>
+                    <th>Saldo</th>
+                    <th>Fecha de Apertura</th>
+                    <th>Cliente</th>
+                    <th>Tipo de Cuenta</th>
+                    <th>Estado cuenta</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="cuenta : ${lista_cuentas}">
+                    <td th:text="${cuenta.cuentaId}"></td>
+                    <td th:text="${cuenta.numeroCuenta}"></td>
+                    <td th:text="${cuenta.saldo}"></td>
+                    <td th:text="${cuenta.fechaApertura}"></td>
+                    <td th:text="${cuenta.cliente.nombre}"></td>
+                    <td th:text="${cuenta.tipoCuenta.descripcion}"></td>
+                    <td th:text="${cuenta.estadoCuenta.descripcion}"></td>
+                    <td>
+                        <a th:href="@{/cuentas/detalle_cuenta/{id}(id=${cuenta.cuentaId})}" class="btn btn-info">Ver</a>
+                        |
+                        <a th:href="@{/cuentas/editar_cuenta/{id}(id=${cuenta.cuentaId})}" class="btn btn-warning">Editar</a> |
+                        <a th:href="@{/cuentas/delete_cuenta/{id}(id=${cuenta.cuentaId})}" class="btn btn-danger">Eliminar</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 
 </html>

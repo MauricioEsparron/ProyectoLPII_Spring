@@ -38,7 +38,7 @@
 					<td th:text="${cliente.fechaNacimiento}"></td>
 					<td th:text="${cliente.dni}"></td>
 					<td th:text="${cliente.usuario.correo}"></td> <!-- Correo corregido -->
-					<td th:text="${cliente.estadoCliente.descripcion}"></td>
+					<td th:text="${cliente.estadoCliente}"></td>
 					<td>
 						<a th:href="@{/clientes/detalle_cliente/{id}(id=${cliente.clienteId})}"
 							class="btn btn-info">Ver</a> |

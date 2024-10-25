@@ -4,7 +4,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Lista de Usuarios</title>
+	<title>Lista de Operaciones</title>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 
@@ -19,7 +19,7 @@
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav mr-auto">
 				<li class="nav-item active">
-					<a class="nav-link" th:href="@{/usuarios}">Usuarios <span class="sr-only">(current)</span></a>
+					<a class="nav-link" th:href="@{/operaciones}">Operaciones <span class="sr-only">(current)</span></a>
 				</li>
 				<li class="nav-item dropdown">
 					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
@@ -27,8 +27,8 @@
 						Opciones
 					</a>
 					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-						<a class="dropdown-item" th:href="@{/usuarios/registrar_usuario}">Registrar Usuario</a>
-						<a class="dropdown-item" th:href="@{/usuarios/lista_usuarios}">Lista de Usuarios</a>
+						<a class="dropdown-item" th:href="@{/operaciones/registrar_operacion}">Registrar Operación</a>
+						<a class="dropdown-item" th:href="@{/operaciones/lista_operaciones}">Lista de Operaciones</a>
 					</div>
 				</li>
 			</ul>
@@ -36,33 +36,40 @@
 	</nav>
 
 	<div class="container">
-		<h2>Lista de Usuarios</h2>
-		<a th:href="@{/usuarios/registrar_usuario}" class="btn btn-primary">Registrar Usuario</a>
+		<h2>Lista de Operaciones</h2>
+		<a th:href="@{/operaciones/registrar_operacion}" class="btn btn-primary">Registrar Operación</a>
 
 		<table class="table mt-4">
 			<thead>
 				<tr>
-					<th>Correo</th>
-					<th>Contraseña</th>
-					<th>URL de Imagen</th>
-					<th>Tipo de Usuario</th>
+					<th>ID</th>
+					<th>Tipo de Operación</th>
+					<th>Monto</th>
+					<th>Fecha y Hora</th>
+					<th>Cuenta Origen</th>
+					<th>Cuenta Destino</th>
+					<th>Usuario</th>
+					<th>Estado</th>
 					<th>Acciones</th>
 				</tr>
 			</thead>
 			<tbody>
-				<tr th:each="usuario : ${lista_usuarios}">
-					<td th:text="${usuario.correo}"></td>
-					<td th:text="${usuario.password}"></td>
-					<td th:text="${usuario.urlImagen}"></td>
-					<td th:text="${usuario.tipoUsuario.descripcion}"></td>
+				<tr th:each="operacion : ${lista_operaciones}">
+					<td th:text="${operacion.operacion_id}"></td>
+					<td th:text="${operacion.tipoOperacion.descripcion}"></td>
+					<td th:text="${operacion.monto}"></td>
+					<td th:text="${operacion.fechaHora}"></td>
+					<td th:text="${operacion.cuentaOrigen.numeroCuenta}"></td>
+					<td th:text="${operacion.cuentaDestino != null ? operacion.cuentaDestino.numeroCuenta : 'N/A'}">
+					</td>
+					<td th:text="${operacion.usuario.correo}"></td>
+					<td th:text="${operacion.estado}"></td>
 					<td>
-						<a th:href="@{/usuarios/detalle_usuario/{correo}(correo=${usuario.correo})}"
-							class="btn btn-info">Ver</a>
-						|
-						<a th:href="@{/usuarios/editar_usuario/{correo}(correo=${usuario.correo})}"
-							class="btn btn-warning">Editar</a>
-						|
-						<a th:href="@{/usuarios/delete_usuario/{correo}(correo=${usuario.correo})}"
+						<a th:href="@{/operaciones/detalle_operacion/{id}(id=${operacion.operacion_id})}"
+							class="btn btn-info">Ver</a> |
+						<a th:href="@{/operaciones/editar_operacion/{id}(id=${operacion.operacion_id})}"
+							class="btn btn-warning">Editar</a> |
+						<a th:href="@{/operaciones/delete_operacion/{id}(id=${operacion.operacion_id})}"
 							class="btn btn-danger">Eliminar</a>
 					</td>
 				</tr>

@@ -1,15 +1,6 @@
 package pe.com.cibertec.model;
 
-import java.util.List;
-
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -31,6 +22,7 @@ public class EstadoClienteEntity {
 	@Column(name = "descripcion", nullable = false)
 	private String descripcion;
 
-	@OneToMany(mappedBy = "estadoCliente", cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<ClienteEntity> clientes;
+	@ManyToOne
+	@JoinColumn(name = "cliente_id", nullable = false)
+	private ClienteEntity cliente; // Esto está correcto
 }

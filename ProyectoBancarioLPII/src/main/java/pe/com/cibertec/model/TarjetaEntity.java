@@ -41,6 +41,6 @@ public class TarjetaEntity {
 	@JoinColumn(name = "tipo_tarjeta_id", nullable = false)
 	private TipoTarjetaEntity tipoTarjeta;
 
-	@Column(name = "estado")
-	private String estado;
+	@Column(name = "estado_tarjeta")
+	private String estadoTajeta;
 }

@@ -8,49 +8,52 @@ import pe.com.cibertec.repository.OperacionRepository; // Cambiar a OperacionRep
 import pe.com.cibertec.service.OperacionService; // Usar el nombre correcto de la interfaz
 
 @Service
-public class OperacionServiceImpl implements OperacionService { // Cambiar a OperacionServiceImpl
+public class OperacionServiceImpl implements OperacionService {
 
-    @Autowired
-    private OperacionRepository operacionRepository; // Cambiar a OperacionRepository
+	@Autowired
+	private OperacionRepository operacionRepository;
 
-    @Override
-    public List<OperacionEntity> buscarOperaciones() {
-        return operacionRepository.findAll(); // Método correcto en el repositorio
-    }
+	@Override
+	public List<OperacionEntity> buscarOperaciones() {
+		return operacionRepository.findAll();
+	}
 
-    @Override
-    public void crearOperacion(OperacionEntity operacion) {
-        operacionRepository.save(operacion); // Guardar la operación
-    }
+	@Override
+	public void crearOperacion(OperacionEntity operacion) {
+		operacionRepository.save(operacion);
+	}
 
-    @Override
-    public OperacionEntity buscarOperacionPorId(Integer id) {
-        return operacionRepository.findById(id).orElse(null); // Buscar operación por ID
-    }
+	@Override
+	public OperacionEntity buscarOperacionPorId(Integer id) {
+		return operacionRepository.findById(id).orElse(null);
+	}
 
-    @Override
-    public void actualizarOperacion(Integer id, OperacionEntity operacionActualizada) {
-        OperacionEntity operacionEncontrada = buscarOperacionPorId(id);
-        if (operacionEncontrada == null) {
-            throw new RuntimeException("Operación no encontrada");
-        }
-        try {
-            operacionEncontrada.setTipoOperacion(operacionActualizada.getTipoOperacion());
-            operacionEncontrada.setMonto(operacionActualizada.getMonto());
-            operacionEncontrada.setFecha(operacionActualizada.getFecha());
-            operacionEncontrada.setHora(operacionActualizada.getHora());
-            operacionRepository.save(operacionEncontrada); // Guardar la operación actualizada
-        } catch (Exception e) {
-            throw new RuntimeException("Error al actualizar: " + e.getMessage());
-        }
-    }
+	@Override
+	public void actualizarOperacion(Integer id, OperacionEntity operacionActualizada) {
+		OperacionEntity operacionEncontrada = buscarOperacionPorId(id);
+		if (operacionEncontrada == null) {
+			throw new RuntimeException("Operación no encontrada");
+		}
+		try {
+			operacionEncontrada.setTipoOperacion(operacionActualizada.getTipoOperacion());
+			operacionEncontrada.setMonto(operacionActualizada.getMonto());
+			operacionEncontrada.setFechaHora(operacionActualizada.getFechaHora());
+			operacionEncontrada.setCuentaOrigen(operacionActualizada.getCuentaOrigen());
+			operacionEncontrada.setCuentaDestino(operacionActualizada.getCuentaDestino());
+			operacionEncontrada.setUsuario(operacionActualizada.getUsuario());
+			operacionEncontrada.setEstado(operacionActualizada.getEstado());
+			operacionRepository.save(operacionEncontrada);
+		} catch (Exception e) {
+			throw new RuntimeException("Error al actualizar: " + e.getMessage());
+		}
+	}
 
-    @Override
-    public void eliminarOperacion(Integer id) {
-        OperacionEntity operacionEncontrada = buscarOperacionPorId(id);
-        if (operacionEncontrada == null) {
-            throw new RuntimeException("Operación no encontrada");
-        }
-        operacionRepository.delete(operacionEncontrada); // Eliminar la operación
-    }
+	@Override
+	public void eliminarOperacion(Integer id) {
+		OperacionEntity operacionEncontrada = buscarOperacionPorId(id);
+		if (operacionEncontrada == null) {
+			throw new RuntimeException("Operación no encontrada");
+		}
+		operacionRepository.delete(operacionEncontrada);
+	}
 }

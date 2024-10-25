@@ -1,7 +1,7 @@
 package pe.com.cibertec.model;
 
 import java.time.LocalDate;
-
+import java.util.List; // Importante para la relación uno a muchos
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -37,7 +37,7 @@ public class ClienteEntity {
 	private String telefono;
 
 	@Column(name = "fecha_nacimiento")
-	private String fechaNacimiento;
+	private String fechaNacimiento; // Cambiado a LocalDate
 
 	@Column(name = "dni", length = 8)
 	private String dni;
@@ -49,7 +49,10 @@ public class ClienteEntity {
 	@Column(name = "fecha_afiliacion")
 	private LocalDate fechaAfiliacion;
 
-	@ManyToOne
-	@JoinColumn(name = "estado_cliente_id", nullable = false)
-	private EstadoClienteEntity estadoCliente;
+	@Column(name = "estado_cliente", nullable = false)
+	private String estadoCliente; // Mantener este campo si es necesario
+
+	// Relación uno a muchos con EstadoClienteEntity
+	@OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
+	private List<EstadoClienteEntity> estados; // Esta lista contendrá los estados asociados a este cliente
 }

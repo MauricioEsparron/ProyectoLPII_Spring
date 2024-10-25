@@ -1,6 +1,7 @@
 package pe.com.cibertec.controller.initializer;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +14,11 @@ import pe.com.cibertec.model.ClienteEntity;
 import pe.com.cibertec.model.CuentaEntity;
 import pe.com.cibertec.model.EstadoClienteEntity;
 import pe.com.cibertec.model.EstadoCuentaEntity;
+import pe.com.cibertec.model.EstadoTarjetaEntity;
+import pe.com.cibertec.model.OperacionEntity;
 import pe.com.cibertec.model.TarjetaEntity;
 import pe.com.cibertec.model.TipoCuentaEntity;
+import pe.com.cibertec.model.TipoOperacionEntity;
 import pe.com.cibertec.model.TipoTarjetaEntity;
 import pe.com.cibertec.repository.TipoUsuarioRepository;
 import pe.com.cibertec.repository.UsuarioRepository;
@@ -24,8 +28,10 @@ import pe.com.cibertec.repository.CuentaRepository;
 import pe.com.cibertec.repository.EstadoClienteRepository;
 import pe.com.cibertec.repository.EstadoCuentaRepository;
 import pe.com.cibertec.repository.EstadoTarjetaRepository;
+import pe.com.cibertec.repository.OperacionRepository;
 import pe.com.cibertec.repository.TarjetaRepository;
 import pe.com.cibertec.repository.TipoCuentaRepository;
+import pe.com.cibertec.repository.TipoOperacionRepository;
 import pe.com.cibertec.repository.TipoTarjetaRepository;
 
 @Component
@@ -60,6 +66,12 @@ public class DataInitializer implements CommandLineRunner {
 
 	@Autowired
 	private CuentaRepository cuentaRepository;
+
+	@Autowired
+	private TipoOperacionRepository tipoOperacionRepository;
+
+	@Autowired
+	private OperacionRepository operacionRepository;
 
 	@Override
 	public void run(String... args) throws Exception {
@@ -151,18 +163,9 @@ public class DataInitializer implements CommandLineRunner {
 		usuarioRepository.save(usuario3);
 
 		// Crear e insertar estados de cliente
-		EstadoClienteEntity estadoActivo = new EstadoClienteEntity();
-		estadoActivo.setDescripcion("Activo");
-
-		EstadoClienteEntity estadoSuspendido = new EstadoClienteEntity();
-		estadoSuspendido.setDescripcion("Suspendido");
-
-		EstadoClienteEntity estadoInactivo = new EstadoClienteEntity();
-		estadoInactivo.setDescripcion("Inactivo");
-
-		estadoClienteRepository.save(estadoActivo);
-		estadoClienteRepository.save(estadoSuspendido);
-		estadoClienteRepository.save(estadoInactivo);
+		String clienteActivo = "activo";
+		String clienteSuspendido = "Suspendido";
+		String clienteInactivo = "Inactivo";
 
 		// Crear e insertar clientes
 		LocalDate fechaActual = LocalDate.now();
@@ -177,7 +180,7 @@ public class DataInitializer implements CommandLineRunner {
 		cliente1.setDni("72899137");
 		cliente1.setUsuario(usuario1);
 		cliente1.setFechaAfiliacion(fechaActual);
-		cliente1.setEstadoCliente(estadoActivo);
+		cliente1.setEstadoCliente(clienteActivo);
 
 		ClienteEntity cliente2 = new ClienteEntity();
 		cliente2.setNombre("Sofi");
@@ -189,7 +192,7 @@ public class DataInitializer implements CommandLineRunner {
 		cliente2.setDni("12349137");
 		cliente2.setUsuario(usuario2);
 		cliente2.setFechaAfiliacion(fechaActual);
-		cliente2.setEstadoCliente(estadoActivo);
+		cliente2.setEstadoCliente(clienteActivo);
 
 		ClienteEntity cliente3 = new ClienteEntity();
 		cliente3.setNombre("Maria");
@@ -201,11 +204,24 @@ public class DataInitializer implements CommandLineRunner {
 		cliente3.setDni("12121212");
 		cliente3.setUsuario(usuario3);
 		cliente3.setFechaAfiliacion(fechaActual);
-		cliente3.setEstadoCliente(estadoActivo);
+		cliente3.setEstadoCliente(clienteActivo);
 
 		clienteRepository.save(cliente1);
 		clienteRepository.save(cliente2);
 		clienteRepository.save(cliente3);
+
+//		EstadoTarjetaEntity tarjetaActiva = new EstadoTarjetaEntity();
+//		tarjetaActiva.setDescripcion("Activa");
+//
+//		EstadoTarjetaEntity tarjetaInactiva = new EstadoTarjetaEntity();
+//		tarjetaInactiva.setDescripcion("Inactiva");
+//
+//		EstadoTarjetaEntity tarjetaBloqueada = new EstadoTarjetaEntity();
+//		tarjetaBloqueada.setDescripcion("Bloqueada");
+//
+//		estadoTarjetaRepository.save(tarjetaActiva);
+//		estadoTarjetaRepository.save(tarjetaInactiva);
+//		estadoTarjetaRepository.save(tarjetaBloqueada);
 
 		// Crear e insertar tarjetas
 		Random random = new Random();
@@ -215,6 +231,10 @@ public class DataInitializer implements CommandLineRunner {
 		long numTarjeta = (long) (Math.pow(10, 9)) + (long) (random2.nextDouble() * Math.pow(10, 9));
 		System.out.println(numTarjeta);
 
+		String tarjetaActiva = "activa";
+		String tarjetabloqueada = "bloqueada";
+		String tarjetaInactiva = "inactiva";
+
 		TarjetaEntity tarjeta1 = new TarjetaEntity();
 		tarjeta1.setNumeroTarjeta(String.valueOf(numTarjeta));
 		tarjeta1.setFechaActivacion(fechaActual);
@@ -222,6 +242,7 @@ public class DataInitializer implements CommandLineRunner {
 		tarjeta1.setCvv(String.valueOf(cvv));
 		tarjeta1.setCliente(cliente1);
 		tarjeta1.setTipoTarjeta(tarjetaPremium);
+		tarjeta1.setEstadoTajeta(tarjetaActiva);
 
 		TarjetaEntity tarjeta2 = new TarjetaEntity();
 		tarjeta2.setNumeroTarjeta(String.valueOf(numTarjeta));
@@ -229,19 +250,11 @@ public class DataInitializer implements CommandLineRunner {
 		tarjeta2.setFechaVencimiento(fechaActual.plusYears(6));
 		tarjeta2.setCvv(String.valueOf(cvv));
 		tarjeta2.setCliente(cliente2);
-		tarjeta2.setTipoTarjeta(tarjetaCredito);
-
-		TarjetaEntity tarjeta3 = new TarjetaEntity();
-		tarjeta3.setNumeroTarjeta(String.valueOf(numTarjeta));
-		tarjeta3.setFechaActivacion(fechaActual);
-		tarjeta3.setFechaVencimiento(fechaActual.plusYears(6));
-		tarjeta3.setCvv(String.valueOf(cvv));
-		tarjeta3.setCliente(cliente3);
-		tarjeta3.setTipoTarjeta(tarjetaCredito);
+		tarjeta2.setTipoTarjeta(tarjetaPremium);
+		tarjeta2.setEstadoTajeta(tarjetaInactiva);
 
 		tarjetaRepository.save(tarjeta1);
 		tarjetaRepository.save(tarjeta2);
-		tarjetaRepository.save(tarjeta3);
 
 		EstadoCuentaEntity estCuenta1 = new EstadoCuentaEntity();
 		estCuenta1.setDescripcion("Activo");
@@ -291,5 +304,56 @@ public class DataInitializer implements CommandLineRunner {
 		cuentaRepository.save(cuenta1);
 		cuentaRepository.save(cuenta2);
 		cuentaRepository.save(cuenta3);
+
+		TipoOperacionEntity tipoOpeDeposito = new TipoOperacionEntity();
+		tipoOpeDeposito.setDescripcion("Deposito");
+
+		TipoOperacionEntity tipoOpeRetiro = new TipoOperacionEntity();
+		tipoOpeRetiro.setDescripcion("Retiro");
+
+		TipoOperacionEntity tipoOpePago = new TipoOperacionEntity();
+		tipoOpePago.setDescripcion("Pago de servicios");
+		
+		TipoOperacionEntity tipoOpeTransferencia = new TipoOperacionEntity();
+		tipoOpeTransferencia.setDescripcion("Transferencia");
+
+		tipoOperacionRepository.save(tipoOpeDeposito);
+		tipoOperacionRepository.save(tipoOpeRetiro);
+		tipoOperacionRepository.save(tipoOpePago);
+		tipoOperacionRepository.save(tipoOpeTransferencia);
+
+		LocalDateTime fechaHoraActual = LocalDateTime.now();
+
+		OperacionEntity ope1 = new OperacionEntity();
+		ope1.setTipoOperacion(tipoOpeDeposito);
+		ope1.setMonto(200.25);
+		ope1.setFechaHora(fechaHoraActual);
+		ope1.setCuentaOrigen(cuenta1);
+		ope1.setCuentaDestino(cuenta1);
+		ope1.setUsuario(usuario1);
+		ope1.setEstado("Completada");
+
+		OperacionEntity ope2 = new OperacionEntity();
+		ope2.setTipoOperacion(tipoOpeTransferencia);
+		ope2.setMonto(259.80);
+		ope2.setFechaHora(fechaHoraActual);
+		ope2.setCuentaOrigen(cuenta2);
+		ope2.setCuentaDestino(cuenta3);
+		ope2.setUsuario(usuario2);
+		ope2.setEstado("Completada");
+
+		OperacionEntity ope3 = new OperacionEntity();
+		ope3.setTipoOperacion(tipoOpeDeposito);
+		ope3.setMonto(1000.99);
+		ope3.setFechaHora(fechaHoraActual);
+		ope3.setCuentaOrigen(cuenta3);
+		ope3.setCuentaDestino(cuenta1);
+		ope3.setUsuario(usuario3);
+		ope3.setEstado("Completada");
+
+		operacionRepository.save(ope1);
+		operacionRepository.save(ope2);
+		operacionRepository.save(ope3);
+
 	}
 }
